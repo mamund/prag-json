@@ -1,0 +1,200 @@
+= The PRAG-JSON Media Type (Pragmatic Representation of Application Grammars)
+:author: Mike Amundsen
+:email: mca@amundsen.com
+:toc: 
+
+== Status
+Doc Status:: 
+  *[white red-background]#Working Draft#* -- _Only experimental and `proof-of-concept' apps should be built on this unstable draft._
+Proposed IANA Registrations::
+  +application/vnd.prag+json+
+Repository::
+  https://github.com/mamund/prag-json
+Sample Implementation::
+  NA
+Last Updated::
+  {docdate}
+
+== Summary
+This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was designed for the book "Design and Build Great Web APIs" (<<dabgwa, [DABGWA]>>).
+
+=== Motivation
+Hypermedia-aware formats like <<html, [HTML]>> are one of teh key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. *PRAG-JSON* was designed to mimic the low-barrier of entry and high usability found in HTML.
+
+*PRAG-JSON* was designed to compliment the book "Design and Build Great Web APIs' (<<dabgwa, [DABGWA]>>). This book is a collection of lessons and common practices aimed to help the reader through the processs of creating hypermedia-style APIs quickly and easily. 
+
+It is hoped that *PRAG-JSON* will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<<kay2003, [KAY2003]>>). 
+
+=== Updates
+There is an open source repository <<repo,[REPO]>> for this specification. Readers are encouraged to submit updates via the repository any time.
+
+=== Compliance
+An implementation (client or server) of this specification is not compliant if it fails to satisfy one or more of the MUST or REQUIRED elements. An implementation that satisfies all the MUST and REQUIRED elements as well as all the SHOULD and RECOMMENDED elements is said to be "unconditionally compliant"; one that satisfies all the MUST and REQUIRED elements but not all the SHOULD and RECOMMENDED elements is said to be "conditionally compliant."
+
+[NOTE]
+.RFC2119 Words
+====
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
+interpreted as described in <<rfc2119,[RFC2119]>>.
+====
+
+== The PRAG-JSON Media Type
+The *PRAG-JSON* media type is a simple JSON <<rfc7159,[RFC7159]>> document that contains runtime status information about network resources on the Web. *PRASG-JSON* has three root elements;
+
+ * +metadata+ : Contains an array of message metadata
+ * +links+ : Contains an array of simple web links and rich forms for navigating the application space and modifying it's state
+ * +items+ : Contains an array of data items. The +items+ collection represents the data associated with the network resource.
+
+This media type can be used to provide dynamic representations of application state at runtime.
+
+=== Example PRAG-JSON document
+Here is a simple *PRAG-JSON* document example:
+
+.Example *PRAG-JSON* document.
+----
+{
+  "metadata" : [ 
+    {"name" : "title", "value" : "BigCo Onboarding"},
+    {"name" : "author", "value" : "Mike Amundsen"},
+    {"name" : "updated", "value" : "2020-03-01"} 
+  ],
+  "links" : [ 
+    {
+      "id" : "q1w2e",
+      "name" : "home",
+      "href" : "http://api.example.org/",
+      "title" : "Home Page",
+      "method" : "GET",
+      "properties" : [ 
+        {
+          "name" : "filter",
+          "value" : ""*
+        } 
+      ]
+    } 
+  ],
+  "items" : [ 
+    {
+      links : [
+        {
+          "id" : "q1w2e3r4"
+          "name" : "item",
+          "href" : "http://api.example.org/q1w2e3r4",
+          "title" : "Read Item",
+          "method" : "GET",
+          "properties": []
+        }
+      ],
+      "wipIdentifier" : "q1w2e3r4",
+      "customerIdentifier" : "w2e3r4t5",
+      "accountIdentifier" : "e3r4t5y6",
+      "activityIdentifier" : "r4t5y6u7",
+      "givenName" : "Idara",
+      "familyName" : "Adams",
+      "email" : "idara.adams@example.org",
+      "telephone" : "123.456.7890",
+      "status" : "pending",
+      "maxValue" : "5000",
+      "discount" : "10"
+    } 
+  ]
+}
+----
+
+== Properties of a PRAG-JSON Document
+All *PRAG-JSON* documents MUST be valid JSON documents. A well-formed *PRAG-JSON* document has three top-level objects: +metadata+, +links+ and +items+. The following is a summary of the structure of the *PRAG-JSON* media type.
+
+=== The +metadata+ Element
+TK
+
+=== The +links+ Element
+The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document. 
+
+////
++_links+::
+  Contains the collection of valid +link+ objects in the *HAL-FORMS* document. This is a RECOMMENDED element. If this element is missing or if the contents is unrecognized, it SHOULD be treated as if it contains a single +link+ element with the key of +self+ and the value of the URL used to request this *HAL-FORMS* document.
++link+::
+  The +link+ element consists of a key and a set of properties. 
+  +
+  * +key+ : The unique identifier of the +link+ object. This is a REQUIRED element for each _link+ object. For this release, the only valid value for the +key+ element is +"self"+. If this element is missing, is set to an unrecognized value, or cannot be parsed, the associated +link+ object SHOULD be ignored.
+  * +href+ : The URL associated with the +key+. This is a REQUIRED element. If this is missing, set to empty or unparsable, the associated +link+ object SHOULD be ignored.
+////
+
+=== The +items+ Element
+The +item+ element contains one or more data items that represent the state of the requested resource.
+
+////
+The +_templates+ element contains a collection of +template+ objects. Each +template+ object contains the following possible properties: 
+
++contentType+ ::
+  The value of +contentType+ is the media type the client SHOULD use when sending a request body to the server. This is an OPTIONAL element. The value of this property SHOULD be set to +"application/json"+ or +"application/x-www-form-urlencoded"+. It MAY be set to other valid media-type values. If the +contentType+ property is missing, is set to empty, or contains an unrecognized value, the client SHOULD act is if the +contentType+ is set to +"application/json"+. See <<encoding-request-bodies,Encoding Request Bodies>> for details.
++key+ :: 
+  The unique identifier for this +template+ object. This is a REQUIRED element. For this release, the only valid value for +key+ is +"default"+.  If this element is missing, set to empty or is unparsable, this +template+ object SHOULD be ignored.
++method+ ::
+  The HTTP method the client SHOULD use when the service request. Any valid HTTP method is allowed. This is a REQUIRED element. If the value is empty or is not understood by the client, the value MUST be treated as an HTTP GET.
++properties+ ::
+  An array of one or more anonymous +property+ objects (see <<property-object, +property+>>) that each describe a parameter for the associated state transition. This is an OPTIONAL element. If the array is missing or empty, the +properties+ collection MUST be treated as an empty set of parameters -- meaning that the transition is meant to be executed without passing any parameters.
++property+ ::
+  A JSON object that describes a state transition parameter. A +property+ object has the following elements:
+  +
+  * +name+ : The parameter name. This is a valid JSON string. This is a REQUIRED element. If this attribute is missing or set to empty, the client SHOULD ignore this +property+ object completely.
+  * +prompt+ : The human-readable prompt for the parameter. This is a valid JSON string. This is an OPTIONAL element. If this element is missing, clients MAY act as if the +prompt+ value is set to the value in the +name+ attribute.
+  * +readOnly+ : Indicates whether the parameter is read-only. This is a valid JSON boolean. This is an OPTIONAL element. If this element is missing, empty, or set to an unrecognized value, it SHOULD be treated as if the value of +readOnly+ is set to `false'. 
+  * +regex+ : A regular expression string to be applied to the value of the parameter. Rules for valid values are the same as the HTML5 pattern attribute <<html5pat,[HTML5PAT]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
+  * +required+ : Indicates whether the parameter is required. This is a valid JSON boolean. This is an OPTIONAL element. If this attribute is missing, set to blank or contains an unrecognized value, it SHOULD be treated as if the value of +required+ is set to `false'.
+  * +templated+ : Indicate whether the +value+ element contains a URI Template <<rfc6570, [RFC6570]>> string for the client to resolve. This is a valid JSON boolean. This is an OPTIONAL element. If this element is missing, set to empty, or contains unrecognized content, it SHOULD be treated as if the value of +templated+ is set to `false'.
+  * +value+ : The parameter value. This is a valid JSON string. This string MAY contain a URI Template (see +templated+ for details). This is an OPTIONAL element. If it does not exist, clients SHOULD act as if the +value+ property is set to an empty string.
+
++title+:: A human-readable string that can be used to identify this template. This is a valid JSON string. This is an OPTIONAL element. If it does not exist or is unparsable, consumers MAY use the +key+ value of the template as the value for +title+.
+////
+
+== The PRAG-JSON Media Type Identifier String
+The media type identifier string for *PRAG-JSON* documents is: +application/vnd.hal-forms+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
+ 
+== Extending the PRAG-JSON Document
+Authors can extend the *PRAG-JSON* media type as long as the following rules are observed:
+
+ . No existing properties or objects are removed.
+ . No existing properties or objects or the list of valid values are altered in a way that is non-backward compatible (e.g. changes MUST NOT break existing implementations that adhere to this specification).
+ . All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elements are introduced in an extension).
+ 
+[WARNING]
+==== 
+Authors should be aware that a future version of this specification MAY add new elements and should take care that any extensions are implemented in a way that reduces the likelihood that a future version of this specification is in conflict with your extension.
+====
+
+== References
+ * [[dabgwa]] [DABGWA] Amundsen, Mike, "Design and Build Great Web APIs", 2020, https://pragprog.com/book/maapis/design-and-build-great-web-apis 
+ * [[kay2003]] [KAY2003] Dr. Alan Kay, "Clarification of "object-oriented", July 2003 (email), http://www.purl.org/stefan_ram/pub/doc_kay_oop_en 
+ * [[html]] [HTML] HTML Living Standard, https://html.spec.whatwg.org/multipage/
+ * [[repo]] [REPO] Github, "PRAG-JSON", https://github.com/mamund/prag-json
+ * [[rfc2119]] [RFC2119] Bradner, S.,"Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
+ * [[rfc7159]] [RFC7159] Bray, T. "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
+
+////
+ * [[html401]] [HTML401] Raggett, D., Ed. et al", "HTML 4.01 Specification", December 1999, https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
+ * [[html5pat]] [HTML5PAT] Hickson, I., Ed. et al, "HTML5 (The Pattern Attribute)", October 2014, http://www.w3.org/TR/html5/forms.html#the-pattern-attribute
+ * [[rfc6570]] [RFC6570] Gregorio, J., et al, "URI Template", March 2012, https://tools.ietf.org/html/rfc6570
+ * [[html5mut]] [HTML5MUT] Hickson, I., Ed. et al, "HTML5 (Mutate Action URL)", October 2014, http://www.w3.org/TR/html5/forms.html#submit-mutate-action
+ * [[html5enc]] [HTML5ENC] Hickson, I., Ed. et al, "HTML5 (Encoding Algorithm)", October 2014, http://www.w3.org/TR/html5/forms.html#application/x-www-form-urlencoded-encoding-algorithm
+////
+ 
+== Acknowledgements
+TK
+
+////
+I thank the everyone who helped contribute to this specification including: 
+Josh Cohen,
+Oliver Drotbohm,
+Pete Johanson,
+Mike Kelly,
+Dilip Krishnan,
+Greg Turnquist.
+////
+
+
+
+ 
+ 
+
