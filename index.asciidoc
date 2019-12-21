@@ -150,7 +150,7 @@ The +_templates+ element contains a collection of +template+ objects. Each +temp
 ////
 
 == The PRAG-JSON Media Type Identifier String
-The media type identifier string for *PRAG-JSON* documents is: +application/vnd.hal-forms+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
+The media type identifier string for *PRAG-JSON* documents is: +application/vnd.prag+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
  
 == Extending the PRAG-JSON Document
 Authors can extend the *PRAG-JSON* media type as long as the following rules are observed:
