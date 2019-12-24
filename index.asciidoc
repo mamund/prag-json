@@ -263,7 +263,7 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[rfc2119]] [RFC2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
  * [[rfc3986]] [RFC3986] Berners-Lee, Fielding, Masinter,"Uniform Resource Identifier (URI): Generic Syntax", 2005,  https://tools.ietf.org/html/rfc3986
  * [[rfc7159]] [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
- ( [[rfc8288]] [RFC8288] Mark Nottingham, "Web Linking", Object 2017, https://tools.ietf.org/html/rfc8288 
+ * [[rfc8288]] [RFC8288] Mark Nottingham, "Web Linking", Object 2017, https://tools.ietf.org/html/rfc8288 
  * [[html5]] [HTML5] HTML Living Standard, https://html.spec.whatwg.org/multipage/
  * [[html5-tag]] [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
  * [[html5-link]] [HTML5-LINK] Ian HIckson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element
