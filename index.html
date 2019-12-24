@@ -795,7 +795,7 @@ Last Updated
 <div class="paragraph"><p>This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was designed for the book "Design and Build Great Web APIs" (<a href="#dabgwa">[DABGWA]</a>).</p></div>
 <div class="sect2">
 <h3 id="_motivation">Motivation</h3>
-<div class="paragraph"><p>Hypermedia-aware formats like <a href="#html">[HTML]</a> are one of teh key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. <strong>PRAG-JSON</strong> was designed to mimic the low-barrier of entry and high usability found in HTML.</p></div>
+<div class="paragraph"><p>Hypermedia-aware formats like <a href="#html5">[HTML5]</a> are one of teh key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. <strong>PRAG-JSON</strong> was designed to mimic the low-barrier of entry and high usability found in HTML.</p></div>
 <div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to compliment the book "Design and Build Great Web APIs' (<a href="#dabgwa">[DABGWA]</a>). This book is a collection of lessons and common practices aimed to help the reader through the processs of creating hypermedia-style APIs quickly and easily.</p></div>
 <div class="paragraph"><p>It is hoped that <strong>PRAG-JSON</strong> will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<a href="#kay2003">[KAY2003]</a>).</p></div>
 </div>
@@ -825,7 +825,7 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 <div class="sect1">
 <h2 id="_the_prag_json_media_type">The PRAG-JSON Media Type</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>The <strong>PRAG-JSON</strong> media type is a simple JSON <a href="#rfc7159">[RFC7159]</a> document that contains runtime status information about network resources on the Web. <strong>PRASG-JSON</strong> has three root elements;</p></div>
+<div class="paragraph"><p>The <strong>PRAG-JSON</strong> media type is a simple JSON <a href="#rfc7159">[RFC7159]</a> document that contains runtime status information about network resources on the Web. <strong>PRAG-JSON</strong> has three root elements;</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -899,7 +899,7 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_properties_of_a_prag_json_document">Properties of a PRAG-JSON Document</h2>
+<h2 id="_elements_of_a_prag_json_document">Elements of a PRAG-JSON Document</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>All <strong>PRAG-JSON</strong> documents MUST be valid JSON documents. A well-formed <strong>PRAG-JSON</strong> document has three top-level objects: <code>metadata</code>, <code>links</code> and <code>items</code>. The following is a summary of the structure of the <strong>PRAG-JSON</strong> media type.</p></div>
 <div class="sect2">
@@ -923,7 +923,7 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_the_code_links_code_element">The <code>links</code> Element</h3>
-<div class="paragraph"><p>The <code>links</code> element contains any links and/or forms associated with the <strong>PRAG-JSON</strong> document.  The <code>links</code> collection is an array of anonymous JSON <code>link</code> objects. These <code>link</code> objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a <code>link</code> object in the <code>links</code> collection. The <code>links</code> object plays a role in <strong>PRAG-JSON</strong> similar to HTML5&#8217;s <code>link</code> (<a href="#html5-link">HTML5-LINK</a>), <code>A</code> (<a href="#html5-a">HTML5-A</a>), and <code>form</code> (<a href="#html5-form">HTML5-FORM</a>).</p></div>
+<div class="paragraph"><p>The <code>links</code> element contains any links and/or forms associated with the <strong>PRAG-JSON</strong> document.  The <code>links</code> collection is an array of anonymous JSON <code>link</code> objects. These <code>link</code> objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a <code>link</code> object in the <code>links</code> collection. The <code>links</code> object plays a role in <strong>PRAG-JSON</strong> similar to HTML5&#8217;s <code>link</code> (<a href="#html5-link">HTML5-LINK</a>), <code>a</code> (<a href="#html5-a">HTML5-A</a>), and <code>form</code> (<a href="#html5-form">HTML5-FORM</a>) tags.</p></div>
 <div class="paragraph"><p>The default properties of a <code>link</code> object that SHOULD appear are: <code>name</code>, <code>href</code>, <code>method</code>, and <code>properties</code>. Additional properties that MAY appear are: <code>id</code>, <code>title</code>, <code>type</code>, <code>rel</code>, <code>tags</code>, <code>type</code>, and <code>enctype</code>. Other properties not defined by this specification MAY appear as well.</p></div>
 <div class="listingblock">
 <div class="title">Sample <code>link</code> object</div>
@@ -979,10 +979,12 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 <div class="paragraph"><p>The <code>schema</code> property SHOULD point to a JSON-Schema (<a href="#json-schema">JSON-SCHEMA</a>) document but MAY point to some other document.</p></div>
 <div class="paragraph"><p>An <code>item</code> object MAY also include a single <code>links</code> collection. This <code>links</code> collection follows the same rules as the top-level <code>links</code> collection (see above).</p></div>
 </div>
-<div class="sect2">
-<h3 id="_prag_json_properties">PRAG-JSON Properties</h3>
-<div class="paragraph"><p>Below is a list of valid <strong>PRAG-JSON</strong> properties. These properties MAY appear in more than one place within a valid <strong>PRAG-JSON</strong> message.</p></div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_prag_json_properties">PRAG-JSON Properties</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Below is a list of valid <strong>PRAG-JSON</strong> properties. These properties MAY appear in more than one place within a valid <strong>PRAG-JSON</strong> message.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -1040,11 +1042,6 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 </li>
 <li>
 <p>
-<a id="html"></a> [HTML] HTML Living Standard, <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
-</p>
-</li>
-<li>
-<p>
 <a id="repo"></a> [REPO] Github, "PRAG-JSON", <a href="https://github.com/mamund/prag-json">https://github.com/mamund/prag-json</a>
 </p>
 </li>
@@ -1060,7 +1057,37 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 </li>
 <li>
 <p>
-<a id="html5-tag"></a>, [HTML5-TAG] Ian Hickson, "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html">https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html</a>
+<a id="html5"></a> [HTML5] HTML Living Standard, <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-tag"></a> [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html">https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-link"></a> [HTML5-LINK] Ian HIckson, Ed., "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element">https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-a"></a> [HTML5-A] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-a-element">https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-a-element</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-form"></a> [HTML5-FORM] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-form-element">https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-form-element</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-input"></a> [HTML5-INPUT] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element">https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-pat"></a> [HTML5-PAT] Hickson, I., Ed. et al, "HTML5: Edition for Web Authors", October 2014, HTML5: Edition for Web Authors", 2011
 </p>
 </li>
 <li>
@@ -1081,7 +1108,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-23 20:47:35 EST
+Last updated 2019-12-23 21:03:34 EST
 </div>
 </div>
 </body>

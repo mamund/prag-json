@@ -19,7 +19,7 @@ Last Updated::
 This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was designed for the book "Design and Build Great Web APIs" (<<dabgwa, [DABGWA]>>).
 
 === Motivation
-Hypermedia-aware formats like <<html, [HTML]>> are one of teh key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. *PRAG-JSON* was designed to mimic the low-barrier of entry and high usability found in HTML.
+Hypermedia-aware formats like <<html5, [HTML5]>> are one of teh key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. *PRAG-JSON* was designed to mimic the low-barrier of entry and high usability found in HTML.
 
 *PRAG-JSON* was designed to compliment the book "Design and Build Great Web APIs' (<<dabgwa, [DABGWA]>>). This book is a collection of lessons and common practices aimed to help the reader through the processs of creating hypermedia-style APIs quickly and easily. 
 
@@ -40,7 +40,7 @@ interpreted as described in <<rfc2119,[RFC2119]>>.
 ====
 
 == The PRAG-JSON Media Type
-The *PRAG-JSON* media type is a simple JSON <<rfc7159,[RFC7159]>> document that contains runtime status information about network resources on the Web. *PRASG-JSON* has three root elements;
+The *PRAG-JSON* media type is a simple JSON <<rfc7159,[RFC7159]>> document that contains runtime status information about network resources on the Web. *PRAG-JSON* has three root elements;
 
  * +metadata+ : Contains an array of message metadata
  * +links+ : Contains an array of simple web links and rich forms for navigating the application space and modifying it's state
@@ -99,7 +99,7 @@ Here is a simple *PRAG-JSON* document example:
 }
 ----
 
-== Properties of a PRAG-JSON Document
+== Elements of a PRAG-JSON Document
 All *PRAG-JSON* documents MUST be valid JSON documents. A well-formed *PRAG-JSON* document has three top-level objects: +metadata+, +links+ and +items+. The following is a summary of the structure of the *PRAG-JSON* media type.
 
 === The +metadata+ Element
@@ -123,7 +123,7 @@ The +metadata+ element is an array of anonymous JSON objects. The default proper
 The +metadata+ element SHOULD NOT contain any +link+ or +item+ elements as they are meant to appear in their own collection.
 
 === The +links+ Element
-The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object in the +links+ collection. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +A+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>).
+The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object in the +links+ collection. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +a+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>) tags.
 
 The default properties of a +link+ object that SHOULD appear are: +name+, +href+, +method+, and +properties+. Additional properties that MAY appear are: +id+, +title+, +type+, +rel+, +tags+, +type+, and +enctype+. Other properties not defined by this specification MAY appear as well.
 
@@ -220,8 +220,9 @@ The +_templates+ element contains a collection of +template+ objects. Each +temp
 +title+:: A human-readable string that can be used to identify this template. This is a valid JSON string. This is an OPTIONAL element. If it does not exist or is unparsable, consumers MAY use the +key+ value of the template as the value for +title+.
 ////
 
-=== PRAG-JSON Properties
+== PRAG-JSON Properties
 Below is a list of valid *PRAG-JSON* properties. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
+
 
 == The PRAG-JSON Media Type Identifier String
 The media type identifier string for *PRAG-JSON* documents is: +application/vnd.prag+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
@@ -241,17 +242,19 @@ Authors should be aware that a future version of this specification MAY add new 
 == References
  * [[dabgwa]] [DABGWA] Mike Amundsen, "Design and Build Great Web APIs", 2020, https://pragprog.com/book/maapis/design-and-build-great-web-apis 
  * [[kay2003]] [KAY2003] Dr. Alan Kay, "Clarification of "object-oriented", July 2003 (email), http://www.purl.org/stefan_ram/pub/doc_kay_oop_en 
- * [[html]] [HTML] HTML Living Standard, https://html.spec.whatwg.org/multipage/
  * [[repo]] [REPO] Github, "PRAG-JSON", https://github.com/mamund/prag-json
  * [[rfc2119]] [RFC2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
  * [[rfc7159]] [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
- * [[html5-tag]], [HTML5-TAG] Ian Hickson, "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
+ * [[html5]] [HTML5] HTML Living Standard, https://html.spec.whatwg.org/multipage/
+ * [[html5-tag]] [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
+ * [[html5-link]] [HTML5-LINK] Ian HIckson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element
+ * [[html5-a]] [HTML5-A] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-a-element
+ * [[html5-form]] [HTML5-FORM] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-form-element
+ * [[html5-input]] [HTML5-INPUT] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element
+ * [[html5-pat]] [HTML5-PAT] Hickson, I., Ed. et al, "HTML5: Edition for Web Authors", October 2014, HTML5: Edition for Web Authors", 2011
  * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
  
 ////
- * [[html401]] [HTML401] Raggett, D., Ed. et al", "HTML 4.01 Specification", December 1999, https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
- * [[html5pat]] [HTML5PAT] Hickson, I., Ed. et al, "HTML5 (The Pattern Attribute)", October 2014, http://www.w3.org/TR/html5/forms.html#the-pattern-attribute
- * [[rfc6570]] [RFC6570] Gregorio, J., et al, "URI Template", March 2012, https://tools.ietf.org/html/rfc6570
  * [[html5mut]] [HTML5MUT] Hickson, I., Ed. et al, "HTML5 (Mutate Action URL)", October 2014, http://www.w3.org/TR/html5/forms.html#submit-mutate-action
  * [[html5enc]] [HTML5ENC] Hickson, I., Ed. et al, "HTML5 (Encoding Algorithm)", October 2014, http://www.w3.org/TR/html5/forms.html#application/x-www-form-urlencoded-encoding-algorithm
 ////
