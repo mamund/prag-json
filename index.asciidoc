@@ -190,44 +190,58 @@ An +item+ object MAY also include a single +links+ collection. This +links+ coll
 === PRAG-JSON Properties
 Below is a list of valid *PRAG-JSON* properties defined in this specification. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
 
-+enctype+:: 
-This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is +application/x-www-form-urlencoded+. However, any valid media type string (<<mediatype-iana, [MEDIATYPE-IANA]>>) MAY appear in the +enctype+ property.
++*enctype*+:: 
+This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is +application/x-www-form-urlencoded+. However, any valid media type string (<<iana-mediatypes, [IANA-MEDIATYPES]>>) MAY appear in the +enctype+ property.
 
-+href+::
++*href*+::
 The +href+ property MUST have a value that is a valid URL (<<rfc3986, [RFC3986]>>). This property, along with other properties of the associated +link+ object, can be used to formulate and execute a state transition. If the value of +href+ is empty or not understood by the recpient, it SHOULD be ignored.
 
-+id+:: 
-This property specifies its object's unique identifier. The value must be unique amongst all the +id+ values in the document and must contain at least one character. The value must not contain any space characters.
++*id*+:: 
+This property specifies its object's unique identifier. The value MUST be unique amongst all the +id+ values in the document and must contain at least one character. The value MUST NOT contain any space characters.
 
-+method+::
-This property specifies the HTTP method the client SHOULD use when sending a request using the +href+ (and possibly the +properties+) associated with the same +link+ object. Any valid HTTP method (see <<methods-iana, METHODS-IANA>>) is allowed. If the value is empty or is not understood by the client, the value MUST be treated if it is set to +"GET"+.
++*method*+::
+This property specifies the HTTP method the client SHOULD use when sending a request using the +href+ (and possibly the +properties+) associated with the same +link+ object. Any valid HTTP method (see <<iana-methods, IANA-METHODS>>) is allowed. If the value is empty or is not understood by the client, the value MUST be treated if it is set to +"GET"+.
 
-+name+:: TK
++*name*+::
+The +name+ property holds the general, non-unique name of the associated object. The value of +name+ MUST be a valid JSON string. 
++
+When the +name+ property appears in a +properties+ collection associated with a +link+ object, the value of the +name+ field is used as the parameter identifier when composing a query or body string to send with the request. If the value of the +name+ property is invalid, un-parseable, or missing, that +property+ SHOULD be ignored when composing a request query or body string.
++
+Then the +name+ property appears in a +link+ or +metadata+ object, the value of the +name+ field represents a non-unique identifier for the associated object. 
 
-+pattern+::
++*pattern*+::
 The value of the +pattern+ property is a regular expression string to be applied to the +value+ property of th associated object. Rules for valid +pattern+ values are the same as the HTML5 pattern attribute <<html5-pattern,[HTML5-PATTERN]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
 
-+properties+:: 
++*properties*+:: 
 This is an array of one or more anonymous +property+ objects. Each +property+ object describes a parameter for the state transition associated +link+ element. This is an OPTIONAL collection. If the array is missing or empty, the +properties+ collection MUST be treated as an empty set of parameters -- meaning that the transition is meant to be executed without passing any parameters.
 
-+readonly+:: 
++*readonly*+:: 
 This is a boolean property which indicates whether the +value+ property of the associated +property+ object is editable. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +readonly+ property is not understood by the recipient, the assumed value of +readonly+ is +"false"+.
 
-+required+:: 
++*required*+:: 
 This is a boolean property which indicates whether the +value+ property of the associated +property+ object MUST be set to a non-empty value. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +required+ property is not understood by the recipient, the assumed value of +required+ is +"false"+.
 
-+rel+:: TK
++*rel*+::
+The value of the +rel+ property is a set of space-separated tokens that represent metadata about the associated +link+ object. There are several sources of valid +rel+ values (see <<iana-linkrels, [IANA-LINKRELS]>>) and rules for creating your own valid +rel+ values (see <<rfc8288, [RFC8288]>>). If the value of +rel+ is empty, un-parseable, or not understood it SHOULD be ignored.
 
-+schema+:: TK
++*schema*+:: 
+The value of the +schema+ property represents a pointer to a schema document that can be used to describe (and possibly validate) the message. The +schema+ property is associated with an +item+ object. The contents of the +schema+ property is a valid URL that, when dereferenced, returns a schema document. By default, the type of schema document returned SHOULD be in JSON-Schema format (<<json-schema, [JSON-SCHEMA]>>) but other formats MAY be returned instead. This is an OPTIONAL field. If the value of +schema+ is empty or un-parseable, it SHOULD be ignored.
 
-+tags+:: TK
++*tags*+::
+This property, when it appears, contains a value that is a set of space-separated tokens representing the various classifications to which the associated object belongs. There are no additional restrictions on the tokens that MAY appear in the +tags+ property. Representation designers are encouraged to use values that describe the nature of the content (noun) rather than the intended actions associated with the content (verb). If the value of +tags+ property is empty or un-parsable, it SHOULD be ignored. If  any of the tokens within the +tags+ value are not understood, those tokens SHOULD be ignored.
 
-+title+::
++*title*+::
 This property represents advisory information for the +property+ object, such as would be appropriate for a tooltip or some other display. The value of +title+ is plain text.
 
-+type+:: TK
++*type*+:: 
+The +type+ property indicates a general type name associated with the +property+ or +item+ object. It MUST be a valid JSON string and MUST NOT contain any space characters. This is an OPTIONAL property.
 
-+value+:: TK
+When it appears within a +property+ object, the value of +type+ can be used to indicate _data_ types (string, boolean, integer, date-time, email, etc.). When it appears in an +item+ object, the value of +type+ can be used to indicate _object_ types (customer, product, location, etc.)./
+
+If the value of +type+ is empty or un-parseable, it SHOULD be ignored.
+
++*value*+::
+The contents of the +value+ property represent the value of the associated +metadata+ or +property+ object. This MUST be a valid JSON string. It MAY be an empty string. There are no other restrictions on the contents of this property.
 
 
 == Extending the PRAG-JSON Format
@@ -249,6 +263,7 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[rfc2119]] [RFC2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
  * [[rfc3986]] [RFC3986] Berners-Lee, Fielding, Masinter,"Uniform Resource Identifier (URI): Generic Syntax", 2005,  https://tools.ietf.org/html/rfc3986
  * [[rfc7159]] [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
+ ( [[rfc8288]] [RFC8288] Mark Nottingham, "Web Linking", Object 2017, https://tools.ietf.org/html/rfc8288 
  * [[html5]] [HTML5] HTML Living Standard, https://html.spec.whatwg.org/multipage/
  * [[html5-tag]] [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
  * [[html5-link]] [HTML5-LINK] Ian HIckson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element
@@ -257,8 +272,9 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[html5-input]] [HTML5-INPUT] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element
  * [[html5-pattern]] [HTML5-PATTERN] Ian Hickson, Ed. et al, HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-pattern-attribute 
  * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
-  * [[methods-iana]] [METHODS-IANA] "Hypertext Transfer Protocol (HTTP) Method Registry", February 2014, https://www.iana.org/assignments/http-methods/http-methods.xhtml
-  * [[mediatype-iana]] [MEDIATYPE-IANA] "Media Types", December 2019, https://www.iana.org/assignments/media-types/media-types.xhtml
+  * [[iana-methods]] [IANA-METHODS] "Hypertext Transfer Protocol (HTTP) Method Registry", April 2017, https://www.iana.org/assignments/http-methods/http-methods.xhtml
+  * [[iana-mediatypes]] [IANA-MEDIATYPES] "Media Types", December 2019, https://www.iana.org/assignments/media-types/media-types.xhtml
+  * [[iana-linkrels]] [IANA-LINKRELS] "Link Relations", November 2019, https://www.iana.org/assignments/link-relations/link-relations.xhtml
   
 == Acknowledgements
 I thank the everyone who helped contribute to this specification. 

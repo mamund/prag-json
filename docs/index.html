@@ -984,15 +984,15 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 <div class="paragraph"><p>Below is a list of valid <strong>PRAG-JSON</strong> properties defined in this specification. These properties MAY appear in more than one place within a valid <strong>PRAG-JSON</strong> message.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<code>enctype</code>
+<code><strong>enctype</strong></code>
 </dt>
 <dd>
 <p>
-This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is <code>application/x-www-form-urlencoded</code>. However, any valid media type string (<a href="#mediatype-iana">[MEDIATYPE-IANA]</a>) MAY appear in the <code>enctype</code> property.
+This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is <code>application/x-www-form-urlencoded</code>. However, any valid media type string (<a href="#iana-mediatypes">[IANA-MEDIATYPES]</a>) MAY appear in the <code>enctype</code> property.
 </p>
 </dd>
 <dt class="hdlist1">
-<code>href</code>
+<code><strong>href</strong></code>
 </dt>
 <dd>
 <p>
@@ -1000,31 +1000,33 @@ The <code>href</code> property MUST have a value that is a valid URL (<a href="#
 </p>
 </dd>
 <dt class="hdlist1">
-<code>id</code>
+<code><strong>id</strong></code>
 </dt>
 <dd>
 <p>
-This property specifies its object&#8217;s unique identifier. The value must be unique amongst all the <code>id</code> values in the document and must contain at least one character. The value must not contain any space characters.
+This property specifies its object&#8217;s unique identifier. The value MUST be unique amongst all the <code>id</code> values in the document and must contain at least one character. The value MUST NOT contain any space characters.
 </p>
 </dd>
 <dt class="hdlist1">
-<code>method</code>
+<code><strong>method</strong></code>
 </dt>
 <dd>
 <p>
-This property specifies the HTTP method the client SHOULD use when sending a request using the <code>href</code> (and possibly the <code>properties</code>) associated with the same <code>link</code> object. Any valid HTTP method (see <a href="#methods-iana">METHODS-IANA</a>) is allowed. If the value is empty or is not understood by the client, the value MUST be treated if it is set to <code>"GET"</code>.
+This property specifies the HTTP method the client SHOULD use when sending a request using the <code>href</code> (and possibly the <code>properties</code>) associated with the same <code>link</code> object. Any valid HTTP method (see <a href="#iana-methods">IANA-METHODS</a>) is allowed. If the value is empty or is not understood by the client, the value MUST be treated if it is set to <code>"GET"</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<code>name</code>
+<code><strong>name</strong></code>
 </dt>
 <dd>
 <p>
-TK
+The <code>name</code> property holds the general, non-unique name of the associated object. The value of <code>name</code> MUST be a valid JSON string.
 </p>
+<div class="paragraph"><p>When the <code>name</code> property appears in a <code>properties</code> collection associated with a <code>link</code> object, the value of the <code>name</code> field is used as the parameter identifier when composing a query or body string to send with the request. If the value of the <code>name</code> property is invalid, un-parseable, or missing, that <code>property</code> SHOULD be ignored when composing a request query or body string.</p></div>
+<div class="paragraph"><p>Then the <code>name</code> property appears in a <code>link</code> or <code>metadata</code> object, the value of the <code>name</code> field represents a non-unique identifier for the associated object.</p></div>
 </dd>
 <dt class="hdlist1">
-<code>pattern</code>
+<code><strong>pattern</strong></code>
 </dt>
 <dd>
 <p>
@@ -1032,7 +1034,7 @@ The value of the <code>pattern</code> property is a regular expression string to
 </p>
 </dd>
 <dt class="hdlist1">
-<code>properties</code>
+<code><strong>properties</strong></code>
 </dt>
 <dd>
 <p>
@@ -1040,7 +1042,7 @@ This is an array of one or more anonymous <code>property</code> objects. Each <c
 </p>
 </dd>
 <dt class="hdlist1">
-<code>readonly</code>
+<code><strong>readonly</strong></code>
 </dt>
 <dd>
 <p>
@@ -1048,7 +1050,7 @@ This is a boolean property which indicates whether the <code>value</code> proper
 </p>
 </dd>
 <dt class="hdlist1">
-<code>required</code>
+<code><strong>required</strong></code>
 </dt>
 <dd>
 <p>
@@ -1056,31 +1058,31 @@ This is a boolean property which indicates whether the <code>value</code> proper
 </p>
 </dd>
 <dt class="hdlist1">
-<code>rel</code>
+<code><strong>rel</strong></code>
 </dt>
 <dd>
 <p>
-TK
+The value of the <code>rel</code> property is a set of space-separated tokens that represent metadata about the associated <code>link</code> object. There are several sources of valid <code>rel</code> values (see <a href="#iana-linkrels">[IANA-LINKRELS]</a>) and rules for creating your own valid <code>rel</code> values (see <a href="#rfc8288">[RFC8288]</a>). If the value of <code>rel</code> is empty, un-parseable, or not understood it SHOULD be ignored.
 </p>
 </dd>
 <dt class="hdlist1">
-<code>schema</code>
+<code><strong>schema</strong></code>
 </dt>
 <dd>
 <p>
-TK
+The value of the <code>schema</code> property represents a pointer to a schema document that can be used to describe (and possibly validate) the message. The <code>schema</code> property is associated with an <code>item</code> object. The contents of the <code>schema</code> property is a valid URL that, when dereferenced, returns a schema document. By default, the type of schema document returned SHOULD be in JSON-Schema format (<a href="#json-schema">[JSON-SCHEMA]</a>) but other formats MAY be returned instead. This is an OPTIONAL field. If the value of <code>schema</code> is empty or un-parseable, it SHOULD be ignored.
 </p>
 </dd>
 <dt class="hdlist1">
-<code>tags</code>
+<code><strong>tags</strong></code>
 </dt>
 <dd>
 <p>
-TK
+This property, when it appears, contains a value that is a set of space-separated tokens representing the various classifications to which the associated object belongs. There are no additional restrictions on the tokens that MAY appear in the <code>tags</code> property. Representation designers are encouraged to use values that describe the nature of the content (noun) rather than the intended actions associated with the content (verb). If the value of <code>tags</code> property is empty or un-parsable, it SHOULD be ignored. If  any of the tokens within the <code>tags</code> value are not understood, those tokens SHOULD be ignored.
 </p>
 </dd>
 <dt class="hdlist1">
-<code>title</code>
+<code><strong>title</strong></code>
 </dt>
 <dd>
 <p>
@@ -1088,19 +1090,23 @@ This property represents advisory information for the <code>property</code> obje
 </p>
 </dd>
 <dt class="hdlist1">
-<code>type</code>
+<code><strong>type</strong></code>
 </dt>
 <dd>
 <p>
-TK
+The <code>type</code> property indicates a general type name associated with the <code>property</code> or <code>item</code> object. It MUST be a valid JSON string and MUST NOT contain any space characters. This is an OPTIONAL property.
 </p>
 </dd>
+</dl></div>
+<div class="paragraph"><p>When it appears within a <code>property</code> object, the value of <code>type</code> can be used to indicate <em>data</em> types (string, boolean, integer, date-time, email, etc.). When it appears in an <code>item</code> object, the value of <code>type</code> can be used to indicate <em>object</em> types (customer, product, location, etc.)./</p></div>
+<div class="paragraph"><p>If the value of <code>type</code> is empty or un-parseable, it SHOULD be ignored.</p></div>
+<div class="dlist"><dl>
 <dt class="hdlist1">
-<code>value</code>
+<code><strong>value</strong></code>
 </dt>
 <dd>
 <p>
-TK
+The contents of the <code>value</code> property represent the value of the associated <code>metadata</code> or <code>property</code> object. This MUST be a valid JSON string. It MAY be an empty string. There are no other restrictions on the contents of this property.
 </p>
 </dd>
 </dl></div>
@@ -1172,6 +1178,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <li>
 <p>
 <a id="rfc7159"></a> [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, <a href="https://tools.ietf.org/html/rfc7159">https://tools.ietf.org/html/rfc7159</a>
+ ( <a id="rfc8288"></a> [RFC8288] Mark Nottingham, "Web Linking", Object 2017, <a href="https://tools.ietf.org/html/rfc8288">https://tools.ietf.org/html/rfc8288</a>
 </p>
 </li>
 <li>
@@ -1216,12 +1223,17 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 </li>
 <li>
 <p>
-<a id="methods-iana"></a> [METHODS-IANA] "Hypertext Transfer Protocol (HTTP) Method Registry", February 2014, <a href="https://www.iana.org/assignments/http-methods/http-methods.xhtml">https://www.iana.org/assignments/http-methods/http-methods.xhtml</a>
+<a id="iana-methods"></a> [IANA-METHODS] "Hypertext Transfer Protocol (HTTP) Method Registry", April 2017, <a href="https://www.iana.org/assignments/http-methods/http-methods.xhtml">https://www.iana.org/assignments/http-methods/http-methods.xhtml</a>
 </p>
 </li>
 <li>
 <p>
-<a id="mediatype-iana"></a> [MEDIATYPE-IANA] "Media Types", December 2019, <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a>
+<a id="iana-mediatypes"></a> [IANA-MEDIATYPES] "Media Types", December 2019, <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a>
+</p>
+</li>
+<li>
+<p>
+<a id="iana-linkrels"></a> [IANA-LINKRELS] "Link Relations", November 2019, <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">https://www.iana.org/assignments/link-relations/link-relations.xhtml</a>
 </p>
 </li>
 </ul></div>
@@ -1237,7 +1249,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-24 14:09:09 EST
+Last updated 2019-12-24 14:57:01 EST
 </div>
 </div>
 </body>
