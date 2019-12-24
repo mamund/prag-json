@@ -29,13 +29,12 @@ There is an open source repository <<repo,[REPO]>> for this specification. Reade
 === Compliance
 An implementation (client or server) of this specification is not compliant if it fails to satisfy one or more of the MUST or REQUIRED elements. An implementation that satisfies all the MUST and REQUIRED elements as well as all the SHOULD and RECOMMENDED elements is said to be "unconditionally compliant"; one that satisfies all the MUST and REQUIRED elements but not all the SHOULD and RECOMMENDED elements is said to be "conditionally compliant."
 
-[NOTE]
 .RFC2119 Words
-====
+****
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", 
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be 
 interpreted as described in <<rfc2119,[RFC2119]>>.
-====
+****
 
 == The PRAG-JSON Media Type
 
