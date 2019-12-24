@@ -265,16 +265,16 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[rfc7159]] [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
  * [[rfc8288]] [RFC8288] Mark Nottingham, "Web Linking", Object 2017, https://tools.ietf.org/html/rfc8288 
  * [[html5]] [HTML5] HTML Living Standard, https://html.spec.whatwg.org/multipage/
- * [[html5-tag]] [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
- * [[html5-link]] [HTML5-LINK] Ian HIckson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element
  * [[html5-a]] [HTML5-A] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-a-element
  * [[html5-form]] [HTML5-FORM] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-form-element
  * [[html5-input]] [HTML5-INPUT] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element
+ * [[html5-link]] [HTML5-LINK] Ian HIckson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-link-element
  * [[html5-pattern]] [HTML5-PATTERN] Ian Hickson, Ed. et al, HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-pattern-attribute 
- * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
+ * [[html5-tag]] [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
   * [[iana-methods]] [IANA-METHODS] "Hypertext Transfer Protocol (HTTP) Method Registry", April 2017, https://www.iana.org/assignments/http-methods/http-methods.xhtml
   * [[iana-mediatypes]] [IANA-MEDIATYPES] "Media Types", December 2019, https://www.iana.org/assignments/media-types/media-types.xhtml
   * [[iana-linkrels]] [IANA-LINKRELS] "Link Relations", November 2019, https://www.iana.org/assignments/link-relations/link-relations.xhtml
+ * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
   * [[form-encoded]] [FORM-ENCODED] https://www.iana.org/assignments/media-types/application/x-www-form-urlencoded
   
 == Acknowledgements
