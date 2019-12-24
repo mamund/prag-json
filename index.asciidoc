@@ -212,7 +212,7 @@ An +item+ object MAY also include a single +links+ collection. This +links+ coll
 == PRAG-JSON Properties
 Below is a list of valid *PRAG-JSON* properties defined in this specification. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
 
-+enctype+:: TK
+*+enctype+*:: TK
 +href+:: TK
 +id+:: TK
 +method+:: TK
