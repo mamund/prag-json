@@ -255,7 +255,7 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[html5-a]] [HTML5-A] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-a-element
  * [[html5-form]] [HTML5-FORM] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-form-element
  * [[html5-input]] [HTML5-INPUT] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element
- * [[html5-pat]] [HTML5-PAT] Hickson, I., Ed. et al, "HTML5: Edition for Web Authors", October 2014, HTML5: Edition for Web Authors", 2011
+ * [[html5-pat]] [HTML5-PAT] Ian Hickson, Ed. et al, HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-pattern-attribute 
  * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
  
 ////
