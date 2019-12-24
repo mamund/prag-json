@@ -166,12 +166,9 @@ The +links+ element SHOULD NOT contain any +metadata or +item+ elements as they 
 
 
 ////
-+_links+::
-  Contains the collection of valid +link+ objects in the *HAL-FORMS* document. This is a RECOMMENDED element. If this element is missing or if the contents is unrecognized, it SHOULD be treated as if it contains a single +link+ element with the key of +self+ and the value of the URL used to request this *HAL-FORMS* document.
 +link+::
   The +link+ element consists of a key and a set of properties. 
   +
-  * +key+ : The unique identifier of the +link+ object. This is a REQUIRED element for each _link+ object. For this release, the only valid value for the +key+ element is +"self"+. If this element is missing, is set to an unrecognized value, or cannot be parsed, the associated +link+ object SHOULD be ignored.
   * +href+ : The URL associated with the +key+. This is a REQUIRED element. If this is missing, set to empty or unparsable, the associated +link+ object SHOULD be ignored.
 ////
 
@@ -196,12 +193,6 @@ The +schema+ property SHOULD point to a JSON-Schema (<<json-schema, JSON-SCHEMA>
 An +item+ object MAY also include a single +links+ collection. This +links+ collection follows the same rules as the top-level +links+ collection (see above). 
 
 ////
-The +_templates+ element contains a collection of +template+ objects. Each +template+ object contains the following possible properties: 
-
-+contentType+ ::
-  The value of +contentType+ is the media type the client SHOULD use when sending a request body to the server. This is an OPTIONAL element. The value of this property SHOULD be set to +"application/json"+ or +"application/x-www-form-urlencoded"+. It MAY be set to other valid media-type values. If the +contentType+ property is missing, is set to empty, or contains an unrecognized value, the client SHOULD act is if the +contentType+ is set to +"application/json"+. See <<encoding-request-bodies,Encoding Request Bodies>> for details.
-+key+ :: 
-  The unique identifier for this +template+ object. This is a REQUIRED element. For this release, the only valid value for +key+ is +"default"+.  If this element is missing, set to empty or is unparsable, this +template+ object SHOULD be ignored.
 +method+ ::
   The HTTP method the client SHOULD use when the service request. Any valid HTTP method is allowed. This is a REQUIRED element. If the value is empty or is not understood by the client, the value MUST be treated as an HTTP GET.
 +properties+ ::
@@ -210,11 +201,9 @@ The +_templates+ element contains a collection of +template+ objects. Each +temp
   A JSON object that describes a state transition parameter. A +property+ object has the following elements:
   +
   * +name+ : The parameter name. This is a valid JSON string. This is a REQUIRED element. If this attribute is missing or set to empty, the client SHOULD ignore this +property+ object completely.
-  * +prompt+ : The human-readable prompt for the parameter. This is a valid JSON string. This is an OPTIONAL element. If this element is missing, clients MAY act as if the +prompt+ value is set to the value in the +name+ attribute.
   * +readOnly+ : Indicates whether the parameter is read-only. This is a valid JSON boolean. This is an OPTIONAL element. If this element is missing, empty, or set to an unrecognized value, it SHOULD be treated as if the value of +readOnly+ is set to `false'. 
   * +regex+ : A regular expression string to be applied to the value of the parameter. Rules for valid values are the same as the HTML5 pattern attribute <<html5pat,[HTML5PAT]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
   * +required+ : Indicates whether the parameter is required. This is a valid JSON boolean. This is an OPTIONAL element. If this attribute is missing, set to blank or contains an unrecognized value, it SHOULD be treated as if the value of +required+ is set to `false'.
-  * +templated+ : Indicate whether the +value+ element contains a URI Template <<rfc6570, [RFC6570]>> string for the client to resolve. This is a valid JSON boolean. This is an OPTIONAL element. If this element is missing, set to empty, or contains unrecognized content, it SHOULD be treated as if the value of +templated+ is set to `false'.
   * +value+ : The parameter value. This is a valid JSON string. This string MAY contain a URI Template (see +templated+ for details). This is an OPTIONAL element. If it does not exist, clients SHOULD act as if the +value+ property is set to an empty string.
 
 +title+:: A human-readable string that can be used to identify this template. This is a valid JSON string. This is an OPTIONAL element. If it does not exist or is unparsable, consumers MAY use the +key+ value of the template as the value for +title+.
@@ -235,6 +224,7 @@ Below is a list of valid *PRAG-JSON* properties defined in this specification. T
 +rel+:: TK
 +schema+:: TK
 +tags+:: TK
++title+:: TK
 +type+:: TK
 +value+:: TK
 
