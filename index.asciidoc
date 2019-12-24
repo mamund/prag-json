@@ -234,7 +234,7 @@ Below is a list of valid *PRAG-JSON* properties defined in this specification. T
 +value+:: TK
 
 
-== Extending the PRAG-JSON Document
+== Extending the PRAG-JSON Format
 Authors can extend the *PRAG-JSON* media type as long as the following rules are observed:
 
  . No existing properties or objects are removed.
