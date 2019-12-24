@@ -125,9 +125,9 @@ The +metadata+ element is an array of anonymous JSON objects. The default proper
 The +metadata+ element SHOULD NOT contain any +link+ or +item+ elements as they are meant to appear in their own collection.
 
 === The +links+ Element
-The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete details on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object in the +links+ collection. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +a+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>) tags.
+The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete details on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +a+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>) tags.
 
-The default properties of a +link+ object that SHOULD appear are: +name+, +href+, +method+, and +properties+. Additional properties that MAY appear are: +id+, +title+, +type+, +rel+, +tags+, +type+, and +enctype+. Other properties not defined by this specification MAY appear as well.
+The default properties of a +link+ object that SHOULD appear are: +name+, +href+, +method+, and +properties+. Additional properties that MAY appear are: +id+, +title+, +rel+, +tags+, +type+, and +enctype+. Other properties not defined by this specification MAY appear as well.
 
 .Sample +link+ object
 ----
@@ -147,7 +147,8 @@ The default properties of a +link+ object that SHOULD appear are: +name+, +href+
 }
 ----
 
-The +properties+ array within a +link+ object contains one or more anonymous +property+ objects. A +property+ object SHOULD have +name+ and +value+ properties. It MAY have additional properties including +id+, +title+, +required+, +readonly+, +minlength+, +pattern+, +type+, and +tags+. Other properties not defined by this specification MAY appear as well. The role the +property+ object plays in *PRAG-JSON* is similar HTML5's +input+ (<<html5-input, HTML5-INPUT>>) element.
+=== The +properties+ Array
+The +properties+ array within a +link+ object contains one or more anonymous +property+ objects. A +property+ object SHOULD have +name+ and +value+ properties. It MAY have additional properties including +id+, +title+, +required+, +readonly+, +pattern+, +type+, and +tags+. Other properties not defined by this specification MAY appear as well. The role the +property+ object plays in *PRAG-JSON* is similar HTML5's +input+ (<<html5-input, HTML5-INPUT>>) element.
 
 .Sample +property+ object
 ----
@@ -165,14 +166,6 @@ The +properties+ array within a +link+ object contains one or more anonymous +pr
 ----
 
 The +links+ element SHOULD NOT contain any +metadata or +item+ elements as they are meant to appear in their own collection.
-
-
-////
-+link+::
-  The +link+ element consists of a key and a set of properties. 
-  +
-  * +href+ : The URL associated with the +key+. This is a REQUIRED element. If this is missing, set to empty or unparsable, the associated +link+ object SHOULD be ignored.
-////
 
 === The +items+ Element
 The +item+ element contains one or more data items that represent the state of the requested resource. The +items+ collection is an array of anonymous JSON arbitrary objects. The +items+ collection SHOULD contain a homogeneous JSON objects (e.g. all +customer+ objects) but MAY contain a heterogeneous collection of objects. 
@@ -192,35 +185,30 @@ Each +item+ object SHOULD have +id+, +type+, and +schema+ properties and MAY hav
 
 The +schema+ property SHOULD point to a JSON-Schema (<<json-schema, JSON-SCHEMA>>) document but MAY point to some other document.
 
-An +item+ object MAY also include a single +links+ collection. This +links+ collection follows the same rules as the top-level +links+ collection (see above). 
-
-////
-+method+ ::
-  The HTTP method the client SHOULD use when the service request. Any valid HTTP method is allowed. This is a REQUIRED element. If the value is empty or is not understood by the client, the value MUST be treated as an HTTP GET.
-+properties+ ::
-  An array of one or more anonymous +property+ objects (see <<property-object, +property+>>) that each describe a parameter for the associated state transition. This is an OPTIONAL element. If the array is missing or empty, the +properties+ collection MUST be treated as an empty set of parameters -- meaning that the transition is meant to be executed without passing any parameters.
-+property+ ::
-  A JSON object that describes a state transition parameter. A +property+ object has the following elements:
-  +
-  * +name+ : The parameter name. This is a valid JSON string. This is a REQUIRED element. If this attribute is missing or set to empty, the client SHOULD ignore this +property+ object completely.
-  * +readOnly+ : Indicates whether the parameter is read-only. This is a valid JSON boolean. This is an OPTIONAL element. If this element is missing, empty, or set to an unrecognized value, it SHOULD be treated as if the value of +readOnly+ is set to `false'. 
-  * +regex+ : A regular expression string to be applied to the value of the parameter. Rules for valid values are the same as the HTML5 pattern attribute <<html5pat,[HTML5PAT]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
-  * +required+ : Indicates whether the parameter is required. This is a valid JSON boolean. This is an OPTIONAL element. If this attribute is missing, set to blank or contains an unrecognized value, it SHOULD be treated as if the value of +required+ is set to `false'.
-  * +value+ : The parameter value. This is a valid JSON string. This string MAY contain a URI Template (see +templated+ for details). This is an OPTIONAL element. If it does not exist, clients SHOULD act as if the +value+ property is set to an empty string.
-
-+title+:: A human-readable string that can be used to identify this template. This is a valid JSON string. This is an OPTIONAL element. If it does not exist or is unparsable, consumers MAY use the +key+ value of the template as the value for +title+.
-////
+An +item+ object MAY also include a single +links+ collection. This +links+ collection within an +item+ object follows the same rules as the top-level +links+ collection (see above). 
 
 === PRAG-JSON Properties
 Below is a list of valid *PRAG-JSON* properties defined in this specification. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
 
-+enctype+:: TK
-+href+:: TK
-+id+:: TK
-+method+:: TK
++enctype+:: 
+This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is +application/x-www-form-urlencoded+. However, any valid media type string (<<mediatype-iana, [MEDIATYPE-IANA]>>) MAY appear in the +enctype+ property.
+
++href+::
+The +href+ property MUST have a value that is a valid URL (<<rfc3986, [RFC3986]>>). This property, along with other properties of the associated +link+ object, can be used to formulate and execute a state transition. If the value of +href+ is empty or not understood by the recpient, it SHOULD be ignored.
+
++id+:: 
+This property specifies its object's unique identifier. The value must be unique amongst all the +id+ values in the document and must contain at least one character. The value must not contain any space characters.
+
++method+::
+This property specifies the HTTP method the client SHOULD use when sending a request using the +href+ (and possibly the +properties+) associated with the same +link+ object. Any valid HTTP method (see <<methods-iana, METHODS-IANA>>) is allowed. If the value is empty or is not understood by the client, the value MUST be treated if it is set to +"GET"+.
+
 +name+:: TK
-+pattern+:: TK
-+properties+:: TK
+
++pattern+::
+The value of the +pattern+ property is a regular expression string to be applied to the +value+ property of th associated object. Rules for valid +pattern+ values are the same as the HTML5 pattern attribute <<html5-pattern,[HTML5-PATTERN]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
+
++properties+:: 
+This is an array of one or more anonymous +property+ objects. Each +property+ object describes a parameter for the state transition associated +link+ element. This is an OPTIONAL collection. If the array is missing or empty, the +properties+ collection MUST be treated as an empty set of parameters -- meaning that the transition is meant to be executed without passing any parameters.
 
 +readonly+:: 
 This is a boolean property which indicates whether the +value+ property of the associated +property+ object is editable. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +readonly+ property is not understood by the recipient, the assumed value of +readonly+ is +"false"+.
@@ -229,10 +217,16 @@ This is a boolean property which indicates whether the +value+ property of the a
 This is a boolean property which indicates whether the +value+ property of the associated +property+ object MUST be set to a non-empty value. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +required+ property is not understood by the recipient, the assumed value of +required+ is +"false"+.
 
 +rel+:: TK
+
 +schema+:: TK
+
 +tags+:: TK
-+title+:: TK
+
++title+::
+This property represents advisory information for the +property+ object, such as would be appropriate for a tooltip or some other display. The value of +title+ is plain text.
+
 +type+:: TK
+
 +value+:: TK
 
 
@@ -253,6 +247,7 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[kay2003]] [KAY2003] Dr. Alan Kay, "Clarification of "object-oriented", July 2003 (email), http://www.purl.org/stefan_ram/pub/doc_kay_oop_en 
  * [[repo]] [REPO] Github, "PRAG-JSON", https://github.com/mamund/prag-json
  * [[rfc2119]] [RFC2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
+ * [[rfc3986]] [RFC3986] Berners-Lee, Fielding, Masinter,"Uniform Resource Identifier (URI): Generic Syntax", 2005,  https://tools.ietf.org/html/rfc3986
  * [[rfc7159]] [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
  * [[html5]] [HTML5] HTML Living Standard, https://html.spec.whatwg.org/multipage/
  * [[html5-tag]] [HTML5-TAG] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
@@ -260,14 +255,18 @@ Authors should be aware that a future version of this specification MAY add new 
  * [[html5-a]] [HTML5-A] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-a-element
  * [[html5-form]] [HTML5-FORM] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-form-element
  * [[html5-input]] [HTML5-INPUT] Ian Hickson, Ed., "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-input-element
- * [[html5-pat]] [HTML5-PAT] Ian Hickson, Ed. et al, HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-pattern-attribute 
+ * [[html5-pattern]] [HTML5-PATTERN] Ian Hickson, Ed. et al, HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110705/spec.html#the-pattern-attribute 
  * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
- 
-////
- * [[html5mut]] [HTML5MUT] Hickson, I., Ed. et al, "HTML5 (Mutate Action URL)", October 2014, http://www.w3.org/TR/html5/forms.html#submit-mutate-action
- * [[html5enc]] [HTML5ENC] Hickson, I., Ed. et al, "HTML5 (Encoding Algorithm)", October 2014, http://www.w3.org/TR/html5/forms.html#application/x-www-form-urlencoded-encoding-algorithm
-////
- 
+  * [[methods-iana]] [METHODS-IANA] "Hypertext Transfer Protocol (HTTP) Method Registry", February 2014, https://www.iana.org/assignments/http-methods/http-methods.xhtml
+  * [[mediatype-iana]] [MEDIATYPE-IANA] "Media Types", December 2019, https://www.iana.org/assignments/media-types/media-types.xhtml
+  
 == Acknowledgements
 I thank the everyone who helped contribute to this specification. 
+
+
+////
+  * +name+ : The parameter name. This is a valid JSON string. This is a REQUIRED element. If this attribute is missing or set to empty, the client SHOULD ignore this +property+ object completely.
+  * +regex+ : A regular expression string to be applied to the value of the parameter. Rules for valid values are the same as the HTML5 pattern attribute <<html5pat,[HTML5PAT]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
+  * +value+ : The parameter value. This is a valid JSON string. This string MAY contain a URI Template (see +templated+ for details). This is an OPTIONAL element. If it does not exist, clients SHOULD act as if the +value+ property is set to an empty string.
+////
 
