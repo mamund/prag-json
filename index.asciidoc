@@ -221,8 +221,13 @@ Below is a list of valid *PRAG-JSON* properties defined in this specification. T
 +name+:: TK
 +pattern+:: TK
 +properties+:: TK
-+readonly+:: TK
-+required+:: TK
+
++readonly+:: 
+This is a boolean property which indicates whether the +value+ property of the associated +property+ object is editable. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +readonly+ property is not understood by the recipient, the assumed value of +readonly+ is +"false"+.
+
++required+:: 
+This is a boolean property which indicates whether the +value+ property of the associated +property+ object MUST be set to a non-empty value. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +required+ property is not understood by the recipient, the assumed value of +required+ is +"false"+.
+
 +rel+:: TK
 +schema+:: TK
 +tags+:: TK
