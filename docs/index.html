@@ -988,7 +988,7 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 </dt>
 <dd>
 <p>
-This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is <code>application/x-www-form-urlencoded</code>. However, any valid media type string (<a href="#iana-mediatypes">[IANA-MEDIATYPES]</a>) MAY appear in the <code>enctype</code> property.
+This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is <code>application/x-www-form-urlencoded</code> (see <a href="#form-encoded">[FORM-ENCODED]</a>). However, other valid media type string (<a href="#iana-mediatypes">[IANA-MEDIATYPES]</a>) MAY appear in the <code>enctype</code> property. All compliant implementations of this specification MUST support the <code>application/x-www-form-urlencoded</code> format. They SHOULD also support the <code>application/json</code> (see <a href="#rfc7159">[RFC7159]</a>) format and MAY support other formats.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -1234,6 +1234,11 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <a id="iana-linkrels"></a> [IANA-LINKRELS] "Link Relations", November 2019, <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">https://www.iana.org/assignments/link-relations/link-relations.xhtml</a>
 </p>
 </li>
+<li>
+<p>
+<a id="form-encoded"></a> [FORM-ENCODED] <a href="https://www.iana.org/assignments/media-types/application/x-www-form-urlencoded">https://www.iana.org/assignments/media-types/application/x-www-form-urlencoded</a>
+</p>
+</li>
 </ul></div>
 </div>
 </div>
@@ -1247,7 +1252,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-24 14:57:33 EST
+Last updated 2019-12-24 15:05:15 EST
 </div>
 </div>
 </body>

@@ -191,7 +191,7 @@ An +item+ object MAY also include a single +links+ collection. This +links+ coll
 Below is a list of valid *PRAG-JSON* properties defined in this specification. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
 
 +*enctype*+:: 
-This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is +application/x-www-form-urlencoded+. However, any valid media type string (<<iana-mediatypes, [IANA-MEDIATYPES]>>) MAY appear in the +enctype+ property.
+This property represents the media type to use when encoding a mesage body to be sent during a state transition. The default value for this field is +application/x-www-form-urlencoded+ (see <<form-encoded, [FORM-ENCODED]>>). However, other valid media type string (<<iana-mediatypes, [IANA-MEDIATYPES]>>) MAY appear in the +enctype+ property. All compliant implementations of this specification MUST support the +application/x-www-form-urlencoded+ format. They SHOULD also support the +application/json+ (see <<rfc7159, [RFC7159]>>) format and MAY support other formats.
 
 +*href*+::
 The +href+ property MUST have a value that is a valid URL (<<rfc3986, [RFC3986]>>). This property, along with other properties of the associated +link+ object, can be used to formulate and execute a state transition. If the value of +href+ is empty or not understood by the recpient, it SHOULD be ignored.
@@ -275,14 +275,7 @@ Authors should be aware that a future version of this specification MAY add new 
   * [[iana-methods]] [IANA-METHODS] "Hypertext Transfer Protocol (HTTP) Method Registry", April 2017, https://www.iana.org/assignments/http-methods/http-methods.xhtml
   * [[iana-mediatypes]] [IANA-MEDIATYPES] "Media Types", December 2019, https://www.iana.org/assignments/media-types/media-types.xhtml
   * [[iana-linkrels]] [IANA-LINKRELS] "Link Relations", November 2019, https://www.iana.org/assignments/link-relations/link-relations.xhtml
+  * [[form-encoded]] [FORM-ENCODED] https://www.iana.org/assignments/media-types/application/x-www-form-urlencoded
   
 == Acknowledgements
 I thank the everyone who helped contribute to this specification. 
-
-
-////
-  * +name+ : The parameter name. This is a valid JSON string. This is a REQUIRED element. If this attribute is missing or set to empty, the client SHOULD ignore this +property+ object completely.
-  * +regex+ : A regular expression string to be applied to the value of the parameter. Rules for valid values are the same as the HTML5 pattern attribute <<html5pat,[HTML5PAT]>>. This is an OPTIONAL element. If this attribute missing, is set to empty, or is unparseable , it SHOULD be ignored.
-  * +value+ : The parameter value. This is a valid JSON string. This string MAY contain a URI Template (see +templated+ for details). This is an OPTIONAL element. If it does not exist, clients SHOULD act as if the +value+ property is set to an empty string.
-////
-
