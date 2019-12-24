@@ -898,10 +898,14 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_iana_media_type_registration_for_prag_json">IANA Media Type Registration for PRAG-JSON</h3>
-<div class="paragraph"><p>The media type identifier string for <strong>PRAG-JSON</strong> documents is: <code>application/vnd.prag+json</code>  This SHOULD be used as part of the HTTP <code>accept</code> header when making a request for a <strong>PRAG-JSON</strong> document. It SHOULD appear as the HTTP <code>content-type</code> header when sending a response that contains a <strong>PRAG-JSON</strong> document.
-== Elements of a PRAG-JSON Document
-All <strong>PRAG-JSON</strong> documents MUST be valid JSON documents. A well-formed <strong>PRAG-JSON</strong> document has three top-level objects: <code>metadata</code>, <code>links</code> and <code>items</code>. The following is a summary of the structure of the <strong>PRAG-JSON</strong> media type.</p></div>
+<div class="paragraph"><p>The media type identifier string for <strong>PRAG-JSON</strong> documents is: <code>application/vnd.prag+json</code>  This SHOULD be used as part of the HTTP <code>accept</code> header when making a request for a <strong>PRAG-JSON</strong> document. It SHOULD appear as the HTTP <code>content-type</code> header when sending a response that contains a <strong>PRAG-JSON</strong> document.</p></div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_elements_of_a_prag_json_document">Elements of a PRAG-JSON Document</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>All <strong>PRAG-JSON</strong> documents MUST be valid JSON documents. A well-formed <strong>PRAG-JSON</strong> document has three top-level objects: <code>metadata</code>, <code>links</code> and <code>items</code>. The following is a summary of the structure of the <strong>PRAG-JSON</strong> media type.</p></div>
 <div class="sect2">
 <h3 id="_the_code_metadata_code_element">The <code>metadata</code> Element</h3>
 <div class="paragraph"><p>The <code>metadata</code> element is meant to hold message-level information <em>about</em> the payload of the response. This might be individual data properities that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the <code>metadata</code> element in <strong>PRAG-JSON</strong> is similar to the role played by the <code>meta</code> tag in HTML5 (<a href="#html5-tag">[HTML5-TAG]</a>).</p></div>
@@ -1225,7 +1229,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2019-12-23 21:49:51 EST
+ 2019-12-23 21:57:36 EST
 </div>
 </div>
 </body>
