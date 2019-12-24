@@ -40,6 +40,8 @@ interpreted as described in <<rfc2119,[RFC2119]>>.
 ====
 
 == The PRAG-JSON Media Type
+
+
 The *PRAG-JSON* media type is a simple JSON <<rfc7159,[RFC7159]>> document that contains runtime status information about network resources on the Web. *PRAG-JSON* has three root elements;
 
  * +metadata+ : Contains an array of message metadata
@@ -49,9 +51,9 @@ The *PRAG-JSON* media type is a simple JSON <<rfc7159,[RFC7159]>> document that 
 This media type can be used to provide dynamic representations of application state at runtime.
 
 === Example PRAG-JSON document
-Here is a simple *PRAG-JSON* document example:
+Below is a sample *PRAG-JSON* document example:
 
-.Example *PRAG-JSON* document.
+.Sample *PRAG-JSON* document.
 ----
 {
   "metadata" : [ 
@@ -99,6 +101,8 @@ Here is a simple *PRAG-JSON* document example:
 }
 ----
 
+=== IANA Media Type Registration for PRAG-JSON
+The media type identifier string for *PRAG-JSON* documents is: +application/vnd.prag+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
 == Elements of a PRAG-JSON Document
 All *PRAG-JSON* documents MUST be valid JSON documents. A well-formed *PRAG-JSON* document has three top-level objects: +metadata+, +links+ and +items+. The following is a summary of the structure of the *PRAG-JSON* media type.
 
@@ -228,9 +232,7 @@ Below is a list of valid *PRAG-JSON* properties defined in this specification. T
 +type+:: TK
 +value+:: TK
 
-== The PRAG-JSON Media Type Identifier String
-The media type identifier string for *PRAG-JSON* documents is: +application/vnd.prag+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
- 
+
 == Extending the PRAG-JSON Document
 Authors can extend the *PRAG-JSON* media type as long as the following rules are observed:
 
