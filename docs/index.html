@@ -795,8 +795,8 @@ Last Updated
 <div class="paragraph"><p>This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was designed for the book "Design and Build Great Web APIs" (<a href="#dabgwa">[DABGWA]</a>).</p></div>
 <div class="sect2">
 <h3 id="_motivation">Motivation</h3>
-<div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to mimic the low-barrier of entry and high usability found in HTML (<a href="#html5">[HTML5]</a>). Hypermedia-aware formats like HTML are one of the key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. It is hoped that <strong>PRAG-JSON</strong> will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<a href="#kay2003">[KAY2003]</a>).</p></div>
-<div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to compliment the book "Design and Build Great Web APIs' (<a href="#dabgwa">[DABGWA]</a>). This book is a collection of lessons and common practices aimed to help the reader through the processs of creating hypermedia-style APIs quickly and easily.</p></div>
+<div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to mimic the low-barrier of entry and high usability found in HTML (<a href="#html5">[HTML5]</a>). Hypermedia-aware formats like HTML are one of the key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or engineering skills. It is hoped that <strong>PRAG-JSON</strong> will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<a href="#kay2003">[KAY2003]</a>).</p></div>
+<div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to compliment the book "Design and Build Great Web APIs' (<a href="#dabgwa">[DABGWA]</a>). This book is a collection of lessons and common practices aimed to help the reader through the process of creating hypermedia-style APIs quickly and easily.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_updates">Updates</h3>
@@ -901,8 +901,8 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 <div class="paragraph"><p>All <strong>PRAG-JSON</strong> documents MUST be valid JSON documents. A well-formed <strong>PRAG-JSON</strong> document has three top-level objects: <code>metadata</code>, <code>links</code> and <code>items</code>. The following is a summary of the structure of the <strong>PRAG-JSON</strong> media type.</p></div>
 <div class="sect2">
 <h3 id="_the_code_metadata_code_element">The <code>metadata</code> Element</h3>
-<div class="paragraph"><p>The <code>metadata</code> element is meant to hold message-level information <em>about</em> the payload of the response. This might be individual data properities that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the <code>metadata</code> element in <strong>PRAG-JSON</strong> is similar to the role played by the <code>meta</code> tag in HTML5 (<a href="#html5-tag">[HTML5-TAG]</a>).</p></div>
-<div class="paragraph"><p>The <code>metadata</code> element is an array of anonymous JSON objects. The default properties of <code>metadata</code> objects that SHOULD appear are <code>name</code> and <code>value</code>. Possible addtional properties that MAY be part of a <code>metadata</code> object include: <code>id</code>, <code>type</code>, <code>title</code>, <code>tags</code>, <code>href</code> and others. Other properties not defined by this specification MAY appear as well.</p></div>
+<div class="paragraph"><p>The <code>metadata</code> element is meant to hold message-level information <em>about</em> the payload of the response. This might be individual data properties that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the <code>metadata</code> element in <strong>PRAG-JSON</strong> is similar to the role played by the <code>meta</code> tag in HTML5 (<a href="#html5-tag">[HTML5-TAG]</a>).</p></div>
+<div class="paragraph"><p>The <code>metadata</code> element is an array of anonymous JSON objects. The default properties of <code>metadata</code> objects that SHOULD appear are <code>name</code> and <code>value</code>. Possible additional properties that MAY be part of a <code>metadata</code> object include: <code>id</code>, <code>type</code>, <code>title</code>, <code>tags</code>, <code>href</code> and others. Other properties not defined by this specification MAY appear as well.</p></div>
 <div class="listingblock">
 <div class="title">Sample <code>metadata</code> object</div>
 <div class="content">
@@ -920,7 +920,7 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_the_code_links_code_element">The <code>links</code> Element</h3>
-<div class="paragraph"><p>The <code>links</code> element contains any links and/or forms associated with the <strong>PRAG-JSON</strong> document.  The <code>links</code> collection is an array of anonymous JSON <code>link</code> objects. These <code>link</code> objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a <code>link</code> object in the <code>links</code> collection. The <code>links</code> object plays a role in <strong>PRAG-JSON</strong> similar to HTML5&#8217;s <code>link</code> (<a href="#html5-link">HTML5-LINK</a>), <code>a</code> (<a href="#html5-a">HTML5-A</a>), and <code>form</code> (<a href="#html5-form">HTML5-FORM</a>) tags.</p></div>
+<div class="paragraph"><p>The <code>links</code> element contains any links and/or forms associated with the <strong>PRAG-JSON</strong> document.  The <code>links</code> collection is an array of anonymous JSON <code>link</code> objects. These <code>link</code> objects are designed to carry complete details on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a <code>link</code> object in the <code>links</code> collection. The <code>links</code> object plays a role in <strong>PRAG-JSON</strong> similar to HTML5&#8217;s <code>link</code> (<a href="#html5-link">HTML5-LINK</a>), <code>a</code> (<a href="#html5-a">HTML5-A</a>), and <code>form</code> (<a href="#html5-form">HTML5-FORM</a>) tags.</p></div>
 <div class="paragraph"><p>The default properties of a <code>link</code> object that SHOULD appear are: <code>name</code>, <code>href</code>, <code>method</code>, and <code>properties</code>. Additional properties that MAY appear are: <code>id</code>, <code>title</code>, <code>type</code>, <code>rel</code>, <code>tags</code>, <code>type</code>, and <code>enctype</code>. Other properties not defined by this specification MAY appear as well.</p></div>
 <div class="listingblock">
 <div class="title">Sample <code>link</code> object</div>
@@ -1220,7 +1220,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2019-12-23 23:50:34 EST
+ 2019-12-23 23:57:52 EST
 </div>
 </div>
 </body>

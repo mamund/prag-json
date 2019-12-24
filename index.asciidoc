@@ -19,9 +19,9 @@ Last Updated::
 This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was designed for the book "Design and Build Great Web APIs" (<<dabgwa, [DABGWA]>>).
 
 === Motivation
-*PRAG-JSON* was designed to mimic the low-barrier of entry and high usability found in HTML (<<html5, [HTML5]>>). Hypermedia-aware formats like HTML are one of the key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or egineering skills. It is hoped that *PRAG-JSON* will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<<kay2003, [KAY2003]>>). 
+*PRAG-JSON* was designed to mimic the low-barrier of entry and high usability found in HTML (<<html5, [HTML5]>>). Hypermedia-aware formats like HTML are one of the key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or engineering skills. It is hoped that *PRAG-JSON* will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<<kay2003, [KAY2003]>>). 
 
-*PRAG-JSON* was designed to compliment the book "Design and Build Great Web APIs' (<<dabgwa, [DABGWA]>>). This book is a collection of lessons and common practices aimed to help the reader through the processs of creating hypermedia-style APIs quickly and easily. 
+*PRAG-JSON* was designed to compliment the book "Design and Build Great Web APIs' (<<dabgwa, [DABGWA]>>). This book is a collection of lessons and common practices aimed to help the reader through the process of creating hypermedia-style APIs quickly and easily. 
 
 === Updates
 There is an open source repository <<repo,[REPO]>> for this specification. Readers are encouraged to submit updates via the repository any time.
@@ -105,9 +105,9 @@ The media type identifier string for *PRAG-JSON* documents is: +application/vnd.
 All *PRAG-JSON* documents MUST be valid JSON documents. A well-formed *PRAG-JSON* document has three top-level objects: +metadata+, +links+ and +items+. The following is a summary of the structure of the *PRAG-JSON* media type.
 
 === The +metadata+ Element
-The +metadata+ element is meant to hold message-level information _about_ the payload of the response. This might be individual data properities that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the +metadata+ element in *PRAG-JSON* is similar to the role played by the +meta+ tag in HTML5 (<<html5-tag, [HTML5-TAG]>>).
+The +metadata+ element is meant to hold message-level information _about_ the payload of the response. This might be individual data properties that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the +metadata+ element in *PRAG-JSON* is similar to the role played by the +meta+ tag in HTML5 (<<html5-tag, [HTML5-TAG]>>).
 
-The +metadata+ element is an array of anonymous JSON objects. The default properties of +metadata+ objects that SHOULD appear are +name+ and +value+. Possible addtional properties that MAY be part of a +metadata+ object include: +id+, +type+, +title+, +tags+, +href+ and others. Other properties not defined by this specification MAY appear as well.
+The +metadata+ element is an array of anonymous JSON objects. The default properties of +metadata+ objects that SHOULD appear are +name+ and +value+. Possible additional properties that MAY be part of a +metadata+ object include: +id+, +type+, +title+, +tags+, +href+ and others. Other properties not defined by this specification MAY appear as well.
 
 .Sample +metadata+ object
 ----
@@ -125,7 +125,7 @@ The +metadata+ element is an array of anonymous JSON objects. The default proper
 The +metadata+ element SHOULD NOT contain any +link+ or +item+ elements as they are meant to appear in their own collection.
 
 === The +links+ Element
-The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object in the +links+ collection. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +a+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>) tags.
+The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete details on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object in the +links+ collection. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +a+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>) tags.
 
 The default properties of a +link+ object that SHOULD appear are: +name+, +href+, +method+, and +properties+. Additional properties that MAY appear are: +id+, +title+, +type+, +rel+, +tags+, +type+, and +enctype+. Other properties not defined by this specification MAY appear as well.
 
