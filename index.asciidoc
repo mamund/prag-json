@@ -16,7 +16,7 @@ Last Updated::
   {docdate}
 
 == Summary
-This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was designed for the book "Design and Build Great Web APIs" (<<dabgwa, [DABGWA]>>).
+This document describes a simple media type designed to make it easy to render and parse hypermedia-aware representations. The format was created for the book "Design and Build Great Web APIs" (<<dabgwa, [DABGWA]>>).
 
 === Motivation
 *PRAG-JSON* was designed to mimic the low-barrier of entry and high usability found in HTML (<<html5, [HTML5]>>). Hypermedia-aware formats like HTML are one of the key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or engineering skills. It is hoped that *PRAG-JSON* will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<<kay2003, [KAY2003]>>). 
