@@ -235,9 +235,9 @@ This property represents advisory information for the +property+ object, such as
 
 +*type*+:: 
 The +type+ property indicates a general type name associated with the +property+ or +item+ object. It MUST be a valid JSON string and MUST NOT contain any space characters. This is an OPTIONAL property.
-
++
 When it appears within a +property+ object, the value of +type+ can be used to indicate _data_ types (string, boolean, integer, date-time, email, etc.). When it appears in an +item+ object, the value of +type+ can be used to indicate _object_ types (customer, product, location, etc.)./
-
++
 If the value of +type+ is empty or un-parseable, it SHOULD be ignored.
 
 +*value*+::
