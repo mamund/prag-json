@@ -103,10 +103,67 @@ Here is a simple *PRAG-JSON* document example:
 All *PRAG-JSON* documents MUST be valid JSON documents. A well-formed *PRAG-JSON* document has three top-level objects: +metadata+, +links+ and +items+. The following is a summary of the structure of the *PRAG-JSON* media type.
 
 === The +metadata+ Element
-TK
+The +metadata+ element is meant to hold message-level information _about_ the payload of the response. This might be individual data properities that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the +metadata+ element in *PRAG-JSON* is similar to the role played by the +meta+ tag in HTML5 (<<html5-tag, [HTML5-TAG]>>).
+
+The +metadata+ element is an array of anonymous JSON objects. The default properties of +metadata+ objects that SHOULD appear are +name+ and +value+. Possible addtional properties that MAY be part of a +metadata+ object include: +id+, +type+, +title+, +tags+, +href+ and others. Other properties not defined by this specification MAY appear as well.
+
+.Sample +metadata+ object
+----
+{
+  "name" : "".
+  "value" : "",
+  "id" : "",
+  "type" : "",
+  "title" : "",
+  "tags" : "",
+  "href" : ""
+}
+----
+
+The +metadata+ element SHOULD NOT contain any +link+ or +item+ elements as they are meant to appear in their own collection.
 
 === The +links+ Element
-The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document. 
+The +links+ element contains any links and/or forms associated with the *PRAG-JSON* document.  The +links+ collection is an array of anonymous JSON +link+ objects. These +link+ objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a +link+ object in the +links+ collection. The +links+ object plays a role in *PRAG-JSON* similar to HTML5's +link+ (<<html5-link,HTML5-LINK>>), +A+ (<<html5-a, HTML5-A>>), and +form+ (<<html5-form, HTML5-FORM>>).
+
+The default properties of a +link+ object that SHOULD appear are: +name+, +href+, +method+, and +properties+. Additional properties that MAY appear are: +id+, +title+, +type+, +rel+, +tags+, +type+, and +enctype+. Other properties not defined by this specification MAY appear as well.
+
+.Sample +link+ object
+----
+{
+  "id" : "".
+  "name" : "",
+  "href" : "",
+  "title" : "",
+  "type" : "".
+  "rel" : "",
+  "tags" : "",
+  "enctype" : "",
+  "method" : "",
+  "properties" : [
+    {"name" : "", "value" : ""}
+  ]
+}
+----
+
+The +properties+ array within a +link+ object contains one or more anonymous +property+ objects. A +property+ object SHOULD have +name+ and +value+ properties. It MAY have additional properties including +id+, +title+, +required+, +readonly+, +minlength+, +pattern+, +type+, and +tags+. Other properties not defined by this specification MAY appear as well. The role the +property+ object plays in *PRAG-JSON* is similar HTML5's +input+ (<<html5-input, HTML5-INPUT>>) element.
+
+.Sample +property+ object
+----
+{
+  "id", : "",
+  "name" : "",
+  "value" : "",
+  "title" : "",
+  "required" : "[true|false]",
+  "readonly" : "[true|false]",
+  "pattern" : "",
+  "type" : "",  
+  "tags" : ""
+}
+----
+
+The +links+ element SHOULD NOT contain any +metadata or +item+ elements as they are meant to appear in their own collection.
+
 
 ////
 +_links+::
@@ -119,7 +176,24 @@ The +links+ element contains any links and/or forms associated with the *PRAG-JS
 ////
 
 === The +items+ Element
-The +item+ element contains one or more data items that represent the state of the requested resource.
+The +item+ element contains one or more data items that represent the state of the requested resource. The +items+ collection is an array of anonymous JSON arbitrary objects. The +items+ collection SHOULD contain a homogeneous JSON objects (e.g. all +customer+ objects) but MAY contain a heterogeneous collection of objects. 
+
+Each +item+ object SHOULD have +id+, +type+, and +schema+ properties and MAY have any number of additional properties. The data for an +item+ MAY be a set of properties at the "top" level or MAY be nested within a single named code (e.g. +graph+ or +data+, etc. Each +item+ object is essentially a graph arbitrary depth and complexity. The +schema+ property of an +item+ SHOULD provide enough information to allow message-handlers to properly parse the +item+.
+
+.Sample +item+ object
+----
+{
+  "id" : "",
+  "type" : "",
+  "schema" : "",
+  "links" : [...]
+  ...
+}
+----
+
+The +schema+ property SHOULD point to a JSON-Schema (<<json-schema, JSON-SCHEMA>>) document but MAY point to some other document.
+
+An +item+ object MAY also include a single +links+ collection. This +links+ collection follows the same rules as the top-level +links+ collection (see above). 
 
 ////
 The +_templates+ element contains a collection of +template+ objects. Each +template+ object contains the following possible properties: 
@@ -146,6 +220,9 @@ The +_templates+ element contains a collection of +template+ objects. Each +temp
 +title+:: A human-readable string that can be used to identify this template. This is a valid JSON string. This is an OPTIONAL element. If it does not exist or is unparsable, consumers MAY use the +key+ value of the template as the value for +title+.
 ////
 
+=== PRAG-JSON Properties
+Below is a list of valid *PRAG-JSON* properties. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
+
 == The PRAG-JSON Media Type Identifier String
 The media type identifier string for *PRAG-JSON* documents is: +application/vnd.prag+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
  
@@ -162,13 +239,15 @@ Authors should be aware that a future version of this specification MAY add new 
 ====
 
 == References
- * [[dabgwa]] [DABGWA] Amundsen, Mike, "Design and Build Great Web APIs", 2020, https://pragprog.com/book/maapis/design-and-build-great-web-apis 
+ * [[dabgwa]] [DABGWA] Mike Amundsen, "Design and Build Great Web APIs", 2020, https://pragprog.com/book/maapis/design-and-build-great-web-apis 
  * [[kay2003]] [KAY2003] Dr. Alan Kay, "Clarification of "object-oriented", July 2003 (email), http://www.purl.org/stefan_ram/pub/doc_kay_oop_en 
  * [[html]] [HTML] HTML Living Standard, https://html.spec.whatwg.org/multipage/
  * [[repo]] [REPO] Github, "PRAG-JSON", https://github.com/mamund/prag-json
- * [[rfc2119]] [RFC2119] Bradner, S.,"Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
- * [[rfc7159]] [RFC7159] Bray, T. "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
-
+ * [[rfc2119]] [RFC2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", March 1997, http://tools.ietf.org/html/rfc2119
+ * [[rfc7159]] [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, https://tools.ietf.org/html/rfc7159
+ * [[html5-tag]], [HTML5-TAG] Ian Hickson, "HTML5: Edition for Web Authors", 2011, https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html
+ * [[json-schema]] [JSON-SCHEMA] "JSON Schema Specification", September 2019, https://json-schema.org/specification.html
+ 
 ////
  * [[html401]] [HTML401] Raggett, D., Ed. et al", "HTML 4.01 Specification", December 1999, https://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
  * [[html5pat]] [HTML5PAT] Hickson, I., Ed. et al, "HTML5 (The Pattern Attribute)", October 2014, http://www.w3.org/TR/html5/forms.html#the-pattern-attribute

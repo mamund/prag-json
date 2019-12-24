@@ -783,7 +783,7 @@ Last Updated
 </dt>
 <dd>
 <p>
-  2019-12-21
+  2019-12-23
 </p>
 </dd>
 </dl></div>
@@ -904,15 +904,84 @@ interpreted as described in <a href="#rfc2119">[RFC2119]</a>.</p></div>
 <div class="paragraph"><p>All <strong>PRAG-JSON</strong> documents MUST be valid JSON documents. A well-formed <strong>PRAG-JSON</strong> document has three top-level objects: <code>metadata</code>, <code>links</code> and <code>items</code>. The following is a summary of the structure of the <strong>PRAG-JSON</strong> media type.</p></div>
 <div class="sect2">
 <h3 id="_the_code_metadata_code_element">The <code>metadata</code> Element</h3>
-<div class="paragraph"><p>TK</p></div>
+<div class="paragraph"><p>The <code>metadata</code> element is meant to hold message-level information <em>about</em> the payload of the response. This might be individual data properities that describe the payload, references to other related content, etc. Anything that might be needed in order to improve the understanding of the payload itself. The role played by the <code>metadata</code> element in <strong>PRAG-JSON</strong> is similar to the role played by the <code>meta</code> tag in HTML5 (<a href="#html5-tag">[HTML5-TAG]</a>).</p></div>
+<div class="paragraph"><p>The <code>metadata</code> element is an array of anonymous JSON objects. The default properties of <code>metadata</code> objects that SHOULD appear are <code>name</code> and <code>value</code>. Possible addtional properties that MAY be part of a <code>metadata</code> object include: <code>id</code>, <code>type</code>, <code>title</code>, <code>tags</code>, <code>href</code> and others. Other properties not defined by this specification MAY appear as well.</p></div>
+<div class="listingblock">
+<div class="title">Sample <code>metadata</code> object</div>
+<div class="content">
+<pre><code>{
+  "name" : "".
+  "value" : "",
+  "id" : "",
+  "type" : "",
+  "title" : "",
+  "tags" : "",
+  "href" : ""
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>The <code>metadata</code> element SHOULD NOT contain any <code>link</code> or <code>item</code> elements as they are meant to appear in their own collection.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_the_code_links_code_element">The <code>links</code> Element</h3>
-<div class="paragraph"><p>The <code>links</code> element contains any links and/or forms associated with the <strong>PRAG-JSON</strong> document.</p></div>
+<div class="paragraph"><p>The <code>links</code> element contains any links and/or forms associated with the <strong>PRAG-JSON</strong> document.  The <code>links</code> collection is an array of anonymous JSON <code>link</code> objects. These <code>link</code> objects are designed to carry complete deatils on Web navigation between resources including any protocol methods, arguments, and so forth. Any time the message needs to render a navigation or state change, this should appear as a <code>link</code> object in the <code>links</code> collection. The <code>links</code> object plays a role in <strong>PRAG-JSON</strong> similar to HTML5&#8217;s <code>link</code> (<a href="#html5-link">HTML5-LINK</a>), <code>A</code> (<a href="#html5-a">HTML5-A</a>), and <code>form</code> (<a href="#html5-form">HTML5-FORM</a>).</p></div>
+<div class="paragraph"><p>The default properties of a <code>link</code> object that SHOULD appear are: <code>name</code>, <code>href</code>, <code>method</code>, and <code>properties</code>. Additional properties that MAY appear are: <code>id</code>, <code>title</code>, <code>type</code>, <code>rel</code>, <code>tags</code>, <code>type</code>, and <code>enctype</code>. Other properties not defined by this specification MAY appear as well.</p></div>
+<div class="listingblock">
+<div class="title">Sample <code>link</code> object</div>
+<div class="content">
+<pre><code>{
+  "id" : "".
+  "name" : "",
+  "href" : "",
+  "title" : "",
+  "type" : "".
+  "rel" : "",
+  "tags" : "",
+  "enctype" : "",
+  "method" : "",
+  "properties" : [
+    {"name" : "", "value" : ""}
+  ]
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>The <code>properties</code> array within a <code>link</code> object contains one or more anonymous <code>property</code> objects. A <code>property</code> object SHOULD have <code>name</code> and <code>value</code> properties. It MAY have additional properties including <code>id</code>, <code>title</code>, <code>required</code>, <code>readonly</code>, <code>minlength</code>, <code>pattern</code>, <code>type</code>, and <code>tags</code>. Other properties not defined by this specification MAY appear as well. The role the <code>property</code> object plays in <strong>PRAG-JSON</strong> is similar HTML5&#8217;s <code>input</code> (<a href="#html5-input">HTML5-INPUT</a>) element.</p></div>
+<div class="listingblock">
+<div class="title">Sample <code>property</code> object</div>
+<div class="content">
+<pre><code>{
+  "id", : "",
+  "name" : "",
+  "value" : "",
+  "title" : "",
+  "required" : "[true|false]",
+  "readonly" : "[true|false]",
+  "pattern" : "",
+  "type" : "",
+  "tags" : ""
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>The <code>links</code> element SHOULD NOT contain any <code>metadata or +item</code> elements as they are meant to appear in their own collection.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_the_code_items_code_element">The <code>items</code> Element</h3>
-<div class="paragraph"><p>The <code>item</code> element contains one or more data items that represent the state of the requested resource.</p></div>
+<div class="paragraph"><p>The <code>item</code> element contains one or more data items that represent the state of the requested resource. The <code>items</code> collection is an array of anonymous JSON arbitrary objects. The <code>items</code> collection SHOULD contain a homogeneous JSON objects (e.g. all <code>customer</code> objects) but MAY contain a heterogeneous collection of objects.</p></div>
+<div class="paragraph"><p>Each <code>item</code> object SHOULD have <code>id</code>, <code>type</code>, and <code>schema</code> properties and MAY have any number of additional properties. The data for an <code>item</code> MAY be a set of properties at the "top" level or MAY be nested within a single named code (e.g. <code>graph</code> or <code>data</code>, etc. Each <code>item</code> object is essentially a graph arbitrary depth and complexity. The <code>schema</code> property of an <code>item</code> SHOULD provide enough information to allow message-handlers to properly parse the <code>item</code>.</p></div>
+<div class="listingblock">
+<div class="title">Sample <code>item</code> object</div>
+<div class="content">
+<pre><code>{
+  "id" : "",
+  "type" : "",
+  "schema" : "",
+  "links" : [...]
+  ...
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>The <code>schema</code> property SHOULD point to a JSON-Schema (<a href="#json-schema">JSON-SCHEMA</a>) document but MAY point to some other document.</p></div>
+<div class="paragraph"><p>An <code>item</code> object MAY also include a single <code>links</code> collection. This <code>links</code> collection follows the same rules as the top-level <code>links</code> collection (see above).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_prag_json_properties">PRAG-JSON Properties</h3>
+<div class="paragraph"><p>Below is a list of valid <strong>PRAG-JSON</strong> properties. These properties MAY appear in more than one place within a valid <strong>PRAG-JSON</strong> message.</p></div>
 </div>
 </div>
 </div>
@@ -961,7 +1030,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div class="ulist"><ul>
 <li>
 <p>
-<a id="dabgwa"></a> [DABGWA] Amundsen, Mike, "Design and Build Great Web APIs", 2020, <a href="https://pragprog.com/book/maapis/design-and-build-great-web-apis">https://pragprog.com/book/maapis/design-and-build-great-web-apis</a>
+<a id="dabgwa"></a> [DABGWA] Mike Amundsen, "Design and Build Great Web APIs", 2020, <a href="https://pragprog.com/book/maapis/design-and-build-great-web-apis">https://pragprog.com/book/maapis/design-and-build-great-web-apis</a>
 </p>
 </li>
 <li>
@@ -981,12 +1050,22 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 </li>
 <li>
 <p>
-<a id="rfc2119"></a> [RFC2119] Bradner, S.,"Key words for use in RFCs to Indicate Requirement Levels", March 1997, <a href="http://tools.ietf.org/html/rfc2119">http://tools.ietf.org/html/rfc2119</a>
+<a id="rfc2119"></a> [RFC2119] S. Bradner, "Key words for use in RFCs to Indicate Requirement Levels", March 1997, <a href="http://tools.ietf.org/html/rfc2119">http://tools.ietf.org/html/rfc2119</a>
 </p>
 </li>
 <li>
 <p>
-<a id="rfc7159"></a> [RFC7159] Bray, T. "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, <a href="https://tools.ietf.org/html/rfc7159">https://tools.ietf.org/html/rfc7159</a>
+<a id="rfc7159"></a> [RFC7159] Tim Bray, "The JavaScript Object Notation (JSON) Data Interchange Format", March 2014, <a href="https://tools.ietf.org/html/rfc7159">https://tools.ietf.org/html/rfc7159</a>
+</p>
+</li>
+<li>
+<p>
+<a id="html5-tag"></a>, [HTML5-TAG] Ian Hickson, "HTML5: Edition for Web Authors", 2011, <a href="https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html">https://www.w3.org/TR/2011/WD-html5-author-20110809/the-meta-element.html</a>
+</p>
+</li>
+<li>
+<p>
+<a id="json-schema"></a> [JSON-SCHEMA] "JSON Schema Specification", September 2019, <a href="https://json-schema.org/specification.html">https://json-schema.org/specification.html</a>
 </p>
 </li>
 </ul></div>
@@ -1002,7 +1081,7 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-21 18:45:20 EST
+Last updated 2019-12-23 20:47:35 EST
 </div>
 </div>
 </body>
