@@ -223,6 +223,22 @@ The +_templates+ element contains a collection of +template+ objects. Each +temp
 == PRAG-JSON Properties
 Below is a list of valid *PRAG-JSON* properties. These properties MAY appear in more than one place within a valid *PRAG-JSON* message. 
 
++id+:: TK
++name+:: TK
++href+:: TK
++rel+:: TK
++type+:: TK
++schema+:: TK
++properties+:: TK
++value+:: TK
++required+:: TK
++readonly+:: TK
++value+:: TK
++pattern+:: TK
++tags+:: TK
++method+:: TK
++enctype+:: TK
+
 
 == The PRAG-JSON Media Type Identifier String
 The media type identifier string for *PRAG-JSON* documents is: +application/vnd.prag+json+  This SHOULD be used as part of the HTTP +accept+ header when making a request for a *PRAG-JSON* document. It SHOULD appear as the HTTP +content-type+ header when sending a response that contains a *PRAG-JSON* document. 
