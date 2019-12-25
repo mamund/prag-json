@@ -219,7 +219,7 @@ This is an array of one or more anonymous +property+ objects. Each +property+ ob
 This is a boolean property which indicates whether the +value+ property of the associated +property+ object is editable. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +readonly+ property is not understood by the recipient, the assumed value of +readonly+ is +"false"+.
 
 +*required*+:: 
-This is a boolean property which indicates whether the +value+ property of the associated +property+ object MUST be set to a non-empty value. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +required+ property is not understood by the recipient, the assumed value of +required+ is +"false"+.
+This is a boolean property which indicates whether the +value+ property of the associated +property+ object must be set to a non-empty value. Valid values are +"true"+ and +"false"+. If this property is missing from the object, is set to any other value than +"true"+ or +"false"+, or if the value of the +required+ property is not understood by the recipient, the assumed value of +required+ is +"false"+.
 
 +*rel*+::
 The value of the +rel+ property is a set of space-separated tokens that represent metadata about the associated +link+ object. There are several sources of valid +rel+ values (see <<iana-linkrels, [IANA-LINKRELS]>>) and rules for creating your own valid +rel+ values (see <<rfc8288, [RFC8288]>>). If the value of +rel+ is empty, un-parseable, or not understood it SHOULD be ignored.
