@@ -63,6 +63,7 @@ Below is a sample *PRAG-JSON* document example:
   "links" : [ 
     {
       "id" : "q1w2e",
+      "rel" : "home",
       "name" : "home",
       "href" : "http://api.example.org/",
       "title" : "Home Page",
@@ -74,6 +75,9 @@ Below is a sample *PRAG-JSON* document example:
   ],
   "items" : [ 
     {
+      "id" : "za1xs2cd3",
+      "type": "wip",
+      "schema" : "api.example.org/schemas/wip.json",
       links : [
         {
           "id" : "q1w2e3r4"
