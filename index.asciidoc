@@ -23,6 +23,8 @@ This document describes a simple media type designed to make it easy to render a
 
 *PRAG-JSON* was designed to compliment the book "Design and Build Great Web APIs' (<<dabgwa, [DABGWA]>>). This book is a collection of lessons and common practices aimed to help the reader through the process of creating hypermedia-style APIs quickly and easily. 
 
+Another key motivator for the design of *PRAG-JSON* is to create web-based hypermedia format that works well in machine-to-machine (M2M) interactions. The foramt is simple in structure (+metadata+, +links+, +items+) and all the key elements support the use of unique in-document identifiers (+id+). These structure elements make is easy to associate data and actions from semantic profiles with exact elements within the response representation -- an important key to successful M2M processing of content w/o relying on inference or other AI/ML support.
+
 === Updates
 There is an open source repository <<repo,[REPO]>> for this specification. Readers are encouraged to submit updates via the repository any time.
 

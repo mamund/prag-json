@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.9" />
+<meta name="generator" content="AsciiDoc 9.0.0rc1" />
 <title>The PRAG-JSON Media Type (Pragmatic Representation of Application Grammars)</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -435,7 +436,7 @@ thead, p.table.header {
 p.table {
   margin-top: 0;
 }
-/* Because the table frame attribute is overriden by CSS in most browsers. */
+/* Because the table frame attribute is overridden by CSS in most browsers. */
 div.tableblock > table[frame="void"] {
   border-style: none;
 }
@@ -783,7 +784,7 @@ Last Updated
 </dt>
 <dd>
 <p>
-  2019-12-24
+  2021-06-12
 </p>
 </dd>
 </dl></div>
@@ -797,6 +798,7 @@ Last Updated
 <h3 id="_motivation">Motivation</h3>
 <div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to mimic the low-barrier of entry and high usability found in HTML (<a href="#html5">[HTML5]</a>). Hypermedia-aware formats like HTML are one of the key reasons the Web become so widespread so quickly. It tapped into the ability to link documents together quickly and easily without much ceremony or engineering skills. It is hoped that <strong>PRAG-JSON</strong> will show how easy it is to create and use an application-level computer messaging format that supports a high degree of loose coupling and extreme late binding (<a href="#kay2003">[KAY2003]</a>).</p></div>
 <div class="paragraph"><p><strong>PRAG-JSON</strong> was designed to compliment the book "Design and Build Great Web APIs' (<a href="#dabgwa">[DABGWA]</a>). This book is a collection of lessons and common practices aimed to help the reader through the process of creating hypermedia-style APIs quickly and easily.</p></div>
+<div class="paragraph"><p>Another key motivator for the design of <strong>PRAG-JSON</strong> is to create web-based hypermedia format that works well in machine-to-machine (M2M) interactions. The foramt is simple in structure (<code>metadata</code>, <code>links</code>, <code>items</code>) and all the key elements support the use of unique in-document identifiers (<code>id</code>). These structure elements make is easy to associate data and actions from semantic profiles with exact elements within the response representation&#8201;&#8212;&#8201;an important key to successful M2M processing of content w/o relying on inference or other AI/ML support.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_updates">Updates</h3>
@@ -1256,7 +1258,8 @@ All new properties or objects are treated as OPTIONAL (e.g. no new REQUIRED elem
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-24 20:28:23 EST
+Last updated
+ 2021-06-12 20:25:09 EDT
 </div>
 </div>
 </body>
